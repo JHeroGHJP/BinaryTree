@@ -3,12 +3,45 @@
 #include <limits.h>
 #include <time.h>
 
-void main()
+#include "functions.h"
+
+int main()
 {
+    srand (time (NULL));
+    
     struct no *arvore;
     arvore = NULL;
     
-    int numbers = rand()%INT_MAX;
+    clock_t inicio, fim;
+    double tempo;
     
-    printf ("Quantidade de números: %i\n", numbers);
+    int tamanho = /*rand()%1000000*/1000000;
+    
+    int vetor[tamanho];
+    
+    printf ("Quantidade de números que serão inseridos na árvore: %i\n", tamanho);
+    
+    preencher (vetor, tamanho);
+    
+    embaralhar (vetor, tamanho);
+    
+    printf ("Alocando nós...\n");
+    
+    inicio = clock();
+    
+    arvore = preencherArvore (vetor, tamanho, arvore);
+    
+    fim = clock();
+    
+    tempo = ((double) (fim - inicio))/CLOCKS_PER_SEC;
+    
+    //printf ("[");
+    
+    //mostrarArvore (arvore);
+    
+    //printf ("]\n");
+    
+    printf ("Todos os nós foram alocados! (%.4lf)\n", tempo);
+    
+    return (0);
 }
