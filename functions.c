@@ -83,27 +83,6 @@ void mostrar (int vetor[], int tamanho)
     printf ("]\n");
 }
 
-void mostrarArvore (struct no *arvore)
-{
-    if (arvore != NULL)
-    {
-        mostrarArvore (arvore->esquerda);
-        printf (" %i ", arvore->numero);
-        mostrarArvore (arvore->direita);
-    }
-}
-
-struct no *criaBloco (int numeroRecebido)
-{
-    struct no *novo = (struct no*) malloc (sizeof (struct no));
-
-    novo->numero = numeroRecebido;
-    novo->direita = NULL;
-    novo->esquerda = NULL;
-
-    return (novo);
-};
-
 struct no *inserir (struct no *arvore, int numeroRecebido)
 {
     if (arvore == NULL)
@@ -121,6 +100,27 @@ struct no *inserir (struct no *arvore, int numeroRecebido)
 
     return (arvore);
 };
+
+struct no *criaBloco (int numeroRecebido)
+{
+    struct no *novo = (struct no*) malloc (sizeof (struct no));
+
+    novo->numero = numeroRecebido;
+    novo->direita = NULL;
+    novo->esquerda = NULL;
+
+    return (novo);
+};
+
+void mostrarArvore (struct no *arvore)
+{
+    if (arvore != NULL)
+    {
+        mostrarArvore (arvore->esquerda);
+        printf (" %i ", arvore->numero);
+        mostrarArvore (arvore->direita);
+    }
+}
 
 int buscaBinaria (struct no *arvore, int numeroBuscado)
 {

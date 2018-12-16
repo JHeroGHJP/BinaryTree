@@ -1,14 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-//#include <limits.h>
-//#include <time.h>
 
 #include "functions.h"
 
 int main()
 {
-    //srand (time (NULL));
-
     struct no *arvore;
     arvore = NULL;
 
@@ -16,23 +12,6 @@ int main()
     lista = NULL;
 
     int opcao;
-
-    //clock_t inicio, fim;
-    //sdouble tempo;
-
-    //int tamanho = 10;
-
-    //int vetor[tamanho];
-
-    //printf ("Quantidade de números que serão inseridos na árvore: %i\n", tamanho);
-
-    //preencher (vetor, tamanho);
-
-    //embaralhar (vetor, tamanho);
-
-    //printf ("Alocando nós...\n");
-
-    //inicio = clock();
 
     do
     {
@@ -104,48 +83,6 @@ int main()
             } break;
         }
     } while(opcao != 0);
-
-    //arvore = preencherArvore (vetor, tamanho, arvore);
-
-    //fim = clock();
-
-    //tempo = ((double) (fim - inicio))/CLOCKS_PER_SEC;
-
-    //printf ("[");
-
-    //mostrarArvore (arvore);
-
-    //printf ("]\n");
-
-    //printf ("Todos os nós foram alocados! (%.10lf)\n", tempo);
-
-    /*
-
-    int buscar;
-
-    printf ("Digite um número para buscar:");
-    scanf ("%i", &buscar);
-
-    inicio = clock();
-
-    buscar = buscaBinaria (arvore, buscar);
-
-    fim = clock();
-
-    tempo = (double) (fim - inicio) / CLOCKS_PER_SEC;
-
-    if (buscar == 0)
-    {
-        printf ("Número não encontrado! (%.4lf)\n", tempo);
-    }
-    else if (buscar == 1)
-    {
-        printf ("Número encontrado! (%.4lf)\n", tempo);
-    }
-
-    */
-
-    //medirBusca (arvore, vetor, tamanho);
 
     return (0);
 }
