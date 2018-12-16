@@ -5,10 +5,24 @@ struct no
     struct no *esquerda;
 };
 
-void preencher (int vetor[], int tamanho);
+struct historico
+{
+    int numero;
+    struct historico *anterior;
+};
+
+struct historico *removerLista (struct historico *lista);
+struct no *removerArvore (struct no *raiz, int numeroBuscado);
+void mostrarHistorico (struct historico *lista);
+struct historico *criarBlocoHistorico (int numeroRecebido);
+struct historico *adicionarHistorico (struct historico *lista, struct historico *novo);
+struct no *buscarUltima (struct no *arvore, int numeroBuscado);
+//void preencher (int vetor[], int tamanho);
 void mostrar (int vetor[], int tamanho);
-void embaralhar (int vetor[], int tamanho);
-struct no *preencherArvore (int vetor[], int tamanho, struct no *arvore);
+//void embaralhar (int vetor[], int tamanho);
+//struct no *preencherArvore (int vetor[], int tamanho, struct no *arvore);
 struct no *inserir (struct no *arvore, int numeroRecebido);
 struct no *criaBloco (int numeroRecebido);
 void mostrarArvore (struct no *arvore);
+int buscaBinaria (struct no *arvore, int numeroBuscado);
+//void medirBusca (struct no *arvore, int vetor[], int tamanho);

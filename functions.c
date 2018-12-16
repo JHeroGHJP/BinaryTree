@@ -1,50 +1,86 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #include "functions.h"
 
-void preencher (int vetor[], int tamanho)
+struct historico *removerLista (struct historico *lista)
 {
-    for (int i = 0; i < tamanho; i++)
-    {
-        vetor[i] = i;
-    }
+    struct historico *auxiliar;
+
+    auxiliar = lista -> anterior;
+
+    free (lista);
+
+    return (auxiliar);
 }
+
+struct no *removerArvore (struct no *raiz, int numeroBuscado)
+{
+    if (raiz -> numero == numeroBuscado && raiz -> direita == NULL && raiz -> esquerda == NULL)
+    {
+        free (raiz);
+        raiz = NULL;
+    }
+    else if (raiz -> numero != numeroBuscado)
+    {
+        if (numeroBuscado > raiz -> numero)
+        {
+            raiz -> direita = removerArvore (raiz -> direita, numeroBuscado);
+        }
+        else if (numeroBuscado < raiz -> numero)
+        {
+            raiz -> esquerda = removerArvore (raiz -> esquerda, numeroBuscado);
+        }
+    }
+
+    return (raiz);
+};
+
+void mostrarHistorico (struct historico *lista)
+{
+    struct historico *auxiliar;
+    auxiliar = lista;
+
+    printf ("[");
+
+    while (auxiliar != NULL)
+    {
+        printf (" %i ", auxiliar -> numero);
+
+        auxiliar = auxiliar -> anterior;
+    }
+
+    printf ("]\n");
+}
+
+struct historico *criarBlocoHistorico (int numeroRecebido)
+{
+    struct historico *novo;
+    novo = (struct historico *) malloc (sizeof(struct historico));
+
+    novo -> numero = numeroRecebido;
+    novo -> anterior = NULL;
+
+    return (novo);
+};
+
+struct historico *adicionarHistorico (struct historico *lista, struct historico *novo)
+{
+    novo -> anterior = lista;
+    return (novo);
+};
 
 void mostrar (int vetor[], int tamanho)
 {
     printf ("[");
-    
+
     for (int i = 0; i < tamanho; i++)
     {
         printf (" %i ", vetor[i]);
     }
-    
-    printf ("]\n");
-}
 
-void embaralhar (int vetor[], int tamanho)
-{
-    int vezes = rand()%10000;
-    int indice1;
-    int indice2;
-    int aux;
-    
-    for (int i = 0; i < vezes; i++)
-    {
-        indice1 = rand()%tamanho;
-        indice2 = rand()%tamanho;
-        
-        while (indice1 == indice2)
-        {
-            indice1 = rand()%tamanho;
-            indice2 = rand()%tamanho;
-        }
-        
-        aux = vetor[indice1];
-        vetor[indice1] = vetor[indice2];
-        vetor[indice2] = aux;
-    }
+    printf ("]\n");
 }
 
 void mostrarArvore (struct no *arvore)
@@ -59,14 +95,14 @@ void mostrarArvore (struct no *arvore)
 
 struct no *criaBloco (int numeroRecebido)
 {
-    struct no *novo = malloc (sizeof (struct no));
-    
+    struct no *novo = (struct no*) malloc (sizeof (struct no));
+
     novo->numero = numeroRecebido;
     novo->direita = NULL;
     novo->esquerda = NULL;
-    
+
     return (novo);
-}
+};
 
 struct no *inserir (struct no *arvore, int numeroRecebido)
 {
@@ -82,16 +118,28 @@ struct no *inserir (struct no *arvore, int numeroRecebido)
     {
         arvore->direita = inserir (arvore->direita, numeroRecebido);
     }
-    
-    return (arvore);
-}
 
-struct no *preencherArvore (int vetor[], int tamanho, struct no *arvore)
-{
-    for (int i = 0; i < tamanho; i++)
-    {
-        arvore = inserir (arvore, vetor[i]);
-    }
-    
     return (arvore);
+};
+
+int buscaBinaria (struct no *arvore, int numeroBuscado)
+{
+    if (numeroBuscado == arvore->numero)
+    {
+        printf ("Achei %i!\n", numeroBuscado);
+        return (1);
+    }
+    else if (numeroBuscado > arvore->numero && arvore->direita != NULL)
+    {
+        buscaBinaria (arvore->direita, numeroBuscado);
+    }
+    else if (numeroBuscado < arvore->numero && arvore->esquerda != NULL)
+    {
+        buscaBinaria (arvore->esquerda, numeroBuscado);
+    }
+    else if (numeroBuscado != arvore->numero)
+    {
+        printf ("Não achei %i!\n", numeroBuscado);
+        return (0);
+    }
 }
