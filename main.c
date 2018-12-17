@@ -21,6 +21,7 @@ int main()
         printf ("3 - Buscar.\n");
         printf ("4 - Remover última adição.\n");
         printf ("5 - Mostrar histórico de inserção.\n");
+        printf ("6 - Altura da árvore.\n");
 
         scanf ("%i", &opcao);
 
@@ -81,6 +82,11 @@ int main()
             {
                 mostrarHistorico (lista);
             } break;
+
+            case 6:
+            {
+                printf ("Altura da árvore: %i\n", altura(arvore));
+            }
         }
     } while(opcao != 0);
 

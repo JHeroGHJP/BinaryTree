@@ -11,6 +11,7 @@ struct historico
     struct historico *anterior;
 };
 
+int altura (struct no *raiz);
 struct historico *removerLista (struct historico *lista);
 struct no *removerArvore (struct no *raiz, int numeroBuscado);
 void mostrarHistorico (struct historico *lista);

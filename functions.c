@@ -4,6 +4,28 @@
 
 #include "functions.h"
 
+int altura (struct no *raiz)
+{
+   if (raiz == NULL)
+   {
+      return -1;
+   }
+   else
+   {
+      int alturaEsquerda = altura (raiz -> esquerda);
+      int alturaDireita = altura (raiz -> direita);
+
+      if (alturaEsquerda < alturaDireita)
+      {
+          return alturaDireita + 1;
+      }
+      else
+      {
+           return alturaEsquerda + 1;
+      }
+   }
+}
+
 struct historico *removerLista (struct historico *lista)
 {
     struct historico *auxiliar;
